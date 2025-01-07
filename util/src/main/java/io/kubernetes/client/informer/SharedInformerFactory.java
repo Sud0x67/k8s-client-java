@@ -23,7 +23,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.BiConsumer;
 
-/** SharedInformerFactory class constructs and caches informers for api types. */
+/**
+ * SharedInformerFactory class constructs and caches informers for api types.
+ * @deprecated SharedInformerFactory does not manage all informers it creates, it is sometimes confusing.
+ * Use SimpleSharedInformerFactory and SimpleSharedInformerManager instead.
+ **/
+@Deprecated
 public class SharedInformerFactory extends SimpleSharedInformerFactory {
 
   private SimpleSharedInformerManager simpleSharedInformerManager;
