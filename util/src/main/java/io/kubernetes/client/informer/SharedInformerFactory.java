@@ -24,7 +24,7 @@ import java.util.concurrent.Executors;
 import java.util.function.BiConsumer;
 
 /** SharedInformerFactory class constructs and caches informers for api types. */
-public class SharedInformerFactory extends SimpleSharedInformerFactory implements SharedInformerManager {
+public class SharedInformerFactory extends SimpleSharedInformerFactory {
 
   private SimpleSharedInformerManager simpleSharedInformerManager;
 
@@ -85,20 +85,17 @@ public class SharedInformerFactory extends SimpleSharedInformerFactory implement
    * @param apiTypeClass the api type class
    * @return the existing shared index informer
    */
-  @Override
   public synchronized <ApiType extends KubernetesObject>
-      SharedIndexInformer<ApiType> getExistingSharedIndexInformer(Class<ApiType> apiTypeClass) {
-    return this.simpleSharedInformerManager.getExistingSharedIndexInformer(apiTypeClass);
+      SharedIndexInformer<ApiType> getSharedIndexInformer(Class<ApiType> apiTypeClass) {
+    return this.simpleSharedInformerManager.getSharedIndexInformer(apiTypeClass);
   }
 
   /** Start all registered informers. */
-  @Override
   public synchronized void startAllRegisteredInformers() {
     this.simpleSharedInformerManager.startAllRegisteredInformers();
   }
 
   /** Stop all registered informers and shut down the thread pool. */
-  @Override
   public synchronized void stopAllRegisteredInformers() {
     stopAllRegisteredInformers(true);
   }
@@ -108,7 +105,6 @@ public class SharedInformerFactory extends SimpleSharedInformerFactory implement
    *
    * @param shutdownThreadPool whether or not to shut down the thread pool.
    */
-  @Override
   public synchronized void stopAllRegisteredInformers(boolean shutdownThreadPool) {
     this.simpleSharedInformerManager.stopAllRegisteredInformers();
   }

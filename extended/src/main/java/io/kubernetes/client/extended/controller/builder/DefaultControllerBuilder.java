@@ -73,7 +73,7 @@ public class DefaultControllerBuilder {
     ControllerWatch<ApiType> watch = controllerWatchGetter.apply(this.workQueue);
     Class<ApiType> apiTypeClass = watch.getResourceClass();
     SharedIndexInformer<ApiType> informer =
-        informerFactory.getExistingSharedIndexInformer(apiTypeClass);
+        informerFactory.getSharedIndexInformer(apiTypeClass);
     if (informer == null) {
       throw new IllegalStateException(
           String.format(

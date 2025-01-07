@@ -18,8 +18,12 @@ import io.kubernetes.client.common.KubernetesObject;
  * A SharedInformerManager manages informers simply by apiTypeClass. For
  */
 public interface SharedInformerManager {
+    <ApiType extends KubernetesObject>  void updateSharedIndexInformer(Class<ApiType> apiTypeClass, SharedIndexInformer<ApiType> informer);
+
+    <ApiType extends KubernetesObject>  void updateSharedIndexInformerIfNotPresent(Class<ApiType> apiTypeClass, SharedIndexInformer<ApiType> informer);
+
     <ApiType extends KubernetesObject>
-      SharedIndexInformer<ApiType> getExistingSharedIndexInformer(Class<ApiType> apiTypeClass);
+      SharedIndexInformer<ApiType> getSharedIndexInformer(Class<ApiType> apiTypeClass);
     void startAllRegisteredInformers();
 
     void stopAllRegisteredInformers();

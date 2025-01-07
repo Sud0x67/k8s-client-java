@@ -33,6 +33,7 @@ public class SimpleSharedInformerManager implements SharedInformerManager {
         this.informerExecutor = informerExecutor;
     }
 
+    @Override
     public synchronized  <ApiType extends KubernetesObject>  void updateSharedIndexInformer(Class<ApiType> apiTypeClass, SharedIndexInformer<ApiType> informer) {
         Type apiType = TypeToken.get(apiTypeClass).getType();
         SharedInformer<ApiType> oldInformer = informers.remove(apiType);
@@ -41,6 +42,7 @@ public class SimpleSharedInformerManager implements SharedInformerManager {
         }
         informers.put(apiTypeClass, informer);
     }
+    @Override
     public synchronized  <ApiType extends KubernetesObject>  void updateSharedIndexInformerIfNotPresent(Class<ApiType> apiTypeClass, SharedIndexInformer<ApiType> informer) {
         Type apiType = TypeToken.get(apiTypeClass).getType();
         if(informers.get(apiType) == null) {
@@ -49,7 +51,7 @@ public class SimpleSharedInformerManager implements SharedInformerManager {
     }
     @Override
     public synchronized <ApiType extends KubernetesObject>
-    SharedIndexInformer<ApiType> getExistingSharedIndexInformer(Class<ApiType> apiTypeClass) {
+    SharedIndexInformer<ApiType> getSharedIndexInformer(Class<ApiType> apiTypeClass) {
         return this.informers.get(TypeToken.get(apiTypeClass).getType());
     }
 
