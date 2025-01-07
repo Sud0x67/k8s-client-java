@@ -12,7 +12,6 @@ limitations under the License.
 */
 package io.kubernetes.client.informer;
 
-import com.google.gson.reflect.TypeToken;
 import io.kubernetes.client.common.KubernetesListObject;
 import io.kubernetes.client.common.KubernetesObject;
 import io.kubernetes.client.informer.cache.Cache;
